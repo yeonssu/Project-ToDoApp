@@ -6,6 +6,7 @@ import com.todoapp.mapper.TodoMapper;
 import com.todoapp.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class TodoService {
 
     public List<TodoDto.Response> getAllTodos() {
         List<Todo> all = todoRepository.findAll();
+        all.sort((a, b) -> a.getTodoOrder() - b.getTodoOrder());
         return mapper.todoListToTodoResponseList(all);
     }
 
